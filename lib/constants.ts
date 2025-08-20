@@ -190,7 +190,7 @@ export const certificates: Certificate[] = [
     date: "Aug 2025",
     id: "UC-8d8e8fa0-c49f-44d9-aa66-3a698d42759b",
     url: "https://www.udemy.com/certificate/UC-8db8e1a0-c49f-4d49-aa66-3a698142759b/",
-    pdf: "/certificates/Agentic_AI.pdf",
+    pdf: "public/certificates/Agentic_AI.pdf",
   },
   {
     title: "CAD Design Specialist",
@@ -198,7 +198,7 @@ export const certificates: Certificate[] = [
     date: "Jun 2023",
     id: "CERT-67890",
     url: "https://www.autodesk.com/certification",
-    pdf: "/certificates/Agentic_AI.pdf", // Using available PDF for now
+    pdf: "/certificates/Agentic_AI.pdf",
   },
   {
     title: "Project Management Fundamentals",
