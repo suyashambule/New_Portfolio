@@ -9,6 +9,20 @@ import { certificates } from '@/lib/constants';
 import { fadeIn, staggerContainer } from '@/lib/motion';
 
 export default function CertificatesPage() {
+	const handleDownload = (pdfPath: string, title: string) => {
+		// Create a temporary link element to trigger download
+		const link = document.createElement('a');
+		link.href = pdfPath;
+		link.download = `${title.replace(/\s+/g, '_')}.pdf`;
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+	};
+
+	const handleVerify = (url: string) => {
+		window.open(url, '_blank', 'noopener,noreferrer');
+	};
+
 	return (
 		<div className="py-16 md:py-24">
 			<div className="container">
@@ -34,7 +48,7 @@ export default function CertificatesPage() {
 								key={index}
 								variants={fadeIn('up', 0.2 * index)}
 							>
-								<Card className="card-gradient">
+								<Card className="card-gradient hover:shadow-lg transition-all duration-300">
 									<CardContent className="p-6">
 										<div className="flex items-start gap-4">
 											<Award className="h-8 w-8 text-primary shrink-0" />
@@ -54,19 +68,25 @@ export default function CertificatesPage() {
 									</CardContent>
 									<CardFooter className="p-6 pt-0 gap-2">
 										{cert.url && (
-											<Button size="sm" variant="outline" asChild>
-												<a href={cert.url} target="_blank" rel="noreferrer">
-													<ExternalLink className="h-4 w-4 mr-2" />
-													Verify
-												</a>
+											<Button 
+												size="sm" 
+												variant="outline" 
+												onClick={() => handleVerify(cert.url!)}
+												className="flex-1 hover:bg-primary hover:text-primary-foreground transition-colors"
+											>
+												<ExternalLink className="h-4 w-4 mr-2" />
+												Verify
 											</Button>
 										)}
 										{cert.pdf && (
-											<Button size="sm" variant="outline" asChild>
-												<a href={cert.pdf} download>
-													<FileDown className="h-4 w-4 mr-2" />
-													Download
-												</a>
+											<Button 
+												size="sm" 
+												variant="outline" 
+												onClick={() => handleDownload(cert.pdf!, cert.title)}
+												className="flex-1 hover:bg-primary hover:text-primary-foreground transition-colors"
+											>
+												<FileDown className="h-4 w-4 mr-2" />
+												Download
 											</Button>
 										)}
 									</CardFooter>
